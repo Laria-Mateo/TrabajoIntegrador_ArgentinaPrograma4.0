@@ -1,16 +1,18 @@
 import * as React from 'react'
 
 // 1. import `ChakraProvider` component
-import { ChakraProvider } from '@chakra-ui/react'
-import Header from './assets/components/Header/header'
-import DivTasks from './assets/components/divTasks/divTasks'
+import { Box, ChakraProvider } from '@chakra-ui/react'
+import Header from './components/Header/header'
+import DivContainer from './components/divContainer/divContainer'
 
 function App() {
   // 2. Wrap ChakraProvider at the root of your app
   return (
     <ChakraProvider>
+      
       <Header/>
-      <DivTasks/>
+      <DivContainer/>
+      
     </ChakraProvider>
   )
 }
