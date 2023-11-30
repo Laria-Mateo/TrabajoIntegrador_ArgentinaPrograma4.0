@@ -9,6 +9,7 @@ import TaskHistory from './components/taskHistory/taskHistory';
 function App() {
   const initialTasks = JSON.parse(localStorage.getItem('tasks')) || [];
   const [tasks, setTasks] = useState(initialTasks);
+  const [tasksh, setTasksh] = useState(initialTasks);
   
   const [isCreatingTask, setIsCreatingTask] = useState(false);
   const [showHistory, setShowHistory] = useState(false);
@@ -20,6 +21,7 @@ function App() {
 
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
+    setTasksh([...tasksh, newTask]);
     setIsCreatingTask(true);
     setShowHistory(false);
   };
@@ -60,7 +62,7 @@ function App() {
       {(isCreatingTask || showHistory) && <TaskForm addTask={addTask} />}
 
       {/* Renderizar el componente TaskHistory solo cuando showHistory es true */}
-      {showHistory && <TaskHistory history={tasks} onClose={() => setShowHistory(false)} />}
+      {showHistory && <TaskHistory history={tasksh} onClose={() => setShowHistory(false)} />}
 
       {/* Renderizar el componente TaskList solo cuando estás creando tareas */}
       {isCreatingTask && !showHistory && <TaskList tasks={tasks} completeTask={completeTask} deleteTask={deleteTask} />}
