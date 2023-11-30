@@ -1,23 +1,27 @@
 import * as React from 'react';
 import { useState, useEffect } from 'react';
-import { Box, ChakraProvider } from '@chakra-ui/react';
+import { ChakraProvider } from '@chakra-ui/react';
 import Header from './components/header/header';
 import TaskList from './components/taskList/taskList';
 import TaskForm from './components/taskForm/taskForm';
+import TaskHistory from './components/taskHistory/taskHistory';
 
 function App() {
-  // Load tasks from local storage on component mount
   const initialTasks = JSON.parse(localStorage.getItem('tasks')) || [];
   const [tasks, setTasks] = useState(initialTasks);
+  
+  const [isCreatingTask, setIsCreatingTask] = useState(false);
+  const [showHistory, setShowHistory] = useState(false);
 
   useEffect(() => {
-    // Save tasks to local storage whenever tasks state changes
     localStorage.setItem('tasks', JSON.stringify(tasks));
     console.log('Lista de tareas actualizada:', tasks);
   }, [tasks]);
 
   const addTask = (newTask) => {
     setTasks([...tasks, newTask]);
+    setIsCreatingTask(true);
+    setShowHistory(false);
   };
 
   const completeTask = (taskId) => {
@@ -32,11 +36,34 @@ function App() {
     setTasks(tasks.filter((task) => task.id !== taskId));
   };
 
+  const startCreatingTask = () => {
+    setIsCreatingTask(true);
+    setShowHistory(false);
+  };
+
+  const showTaskHistory = () => {
+    setShowHistory(true);
+    setIsCreatingTask(false);
+  };
+
   return (
     <ChakraProvider>
       <Header />
-      <TaskForm addTask={addTask} />
-      <TaskList tasks={tasks} completeTask={completeTask} deleteTask={deleteTask} />
+
+      {/* Mostrar ambos botones en todo momento */}
+      <div>
+        <button onClick={startCreatingTask}>Tareas</button>
+        <button onClick={showTaskHistory}>Historial</button>
+      </div>
+
+      {/* Renderizar el formulario siempre, pero mostrarlo solo cuando estés creando tareas */}
+      {(isCreatingTask || showHistory) && <TaskForm addTask={addTask} />}
+
+      {/* Renderizar el componente TaskHistory solo cuando showHistory es true */}
+      {showHistory && <TaskHistory history={tasks} onClose={() => setShowHistory(false)} />}
+
+      {/* Renderizar el componente TaskList solo cuando estás creando tareas */}
+      {isCreatingTask && !showHistory && <TaskList tasks={tasks} completeTask={completeTask} deleteTask={deleteTask} />}
     </ChakraProvider>
   );
 }
