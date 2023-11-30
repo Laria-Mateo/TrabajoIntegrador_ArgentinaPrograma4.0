@@ -58,28 +58,26 @@ function App() {
       <Header />
 
 
-      
 
-      <Box hideBelow="md" pos={"absolute"} ml={"40px"} mt={"30px"}>
+
+      <Box hideBelow="md" pos={"absolute"} ml={"150px"} mt={"100px"}>
         <button onClick={startCreatingTask}>
-          <Flex mb={"20px"} w="90px" borderLeft='5px solid transparent' _hover={{ borderLeft: "5px solid #00B499", cursor: "pointer" }}>
-
-            <Image m="2px" src={lista} alt='' />
-            <Text mt="7px" ml="6px">Tasks</Text>
+          <Flex mb={"20px"} w="120px" borderLeft='5px solid transparent' _hover={{ borderLeft: "5px solid #00B499", cursor: "pointer" }}>
+            <Image w="100%" h="40px" mt={"25px"} objectFit="contain" src={lista} alt='' />
+            <Text mt="20px" ml="6px" style={{ fontSize: "30px" }}>Tasks</Text>
           </Flex>
         </button>
 
         <Box h="10px" />
 
-        <button onClick={showTaskHistory}>
-          <Flex w="100px" borderLeft='5px solid transparent' _hover={{ borderLeft: "5px solid #00B499", cursor: "pointer" }}>
-          
-            <Image src={history} alt='' />
-            <Text mt="3px" ml="6px">History</Text>
+        <button onClick={showTaskHistory} mb={"0px"}>
+          <Flex w="120px" borderLeft='5px solid transparent'mb={"0px"}  _hover={{ borderLeft: "5px solid #00B499", cursor: "pointer" }}>
+            <Image src={history} alt=''mb={"0px"} w="40px" h="90px" objectFit="contain" />
+            <Text mt="20px"  ml="6px" mb={"0px"} style={{ fontSize: "30px" }}>History</Text>
           </Flex>
-
         </button>
       </Box>
+
       <Flex
         mt="5vh"
         mb="3vh"
@@ -91,23 +89,23 @@ function App() {
           {(isCreatingTask || showHistory) && <TaskForm addTask={addTask} />}
           <Box hideFrom="md" display="flex" mt="15px"  >
 
-              <button onClick={startCreatingTask}>
+            <button onClick={startCreatingTask}>
               <Flex w="90px" borderBottom='4px solid transparent' _hover={{ borderBottom: "4px solid #00B499", cursor: "pointer" }}>
 
                 <Image m="2px" src={lista} alt='' />
                 <Text mt="4px" ml="6px">Tasks</Text>
-                </Flex>
+              </Flex>
 
-              </button>
+            </button>
 
-              <button onClick={showTaskHistory}>
+            <button onClick={showTaskHistory}>
               <Flex ml="50px" w="100px" borderBottom='4px solid transparent' _hover={{ borderBottom: "4px solid #00B499", cursor: "pointer" }}>
 
                 <img paddingLeft="10px" src={history} alt='' />
                 <Text ml="8px" mt="2px" >History</Text>
-                </Flex>
+              </Flex>
 
-              </button>
+            </button>
           </Box>
 
 
