@@ -26,9 +26,11 @@ const TaskForm = ({ addTask }) => {
                             placeholder='Enter your Task'
                             borderRadius={"15px"}
                             borderColor={"#E6E6E6"}
-                            width={"sm"}
+                            width={{ base: 'sm', lg: 'lg' }}  
+                            maxW={{ base: 'full', lg: 'container.lg' }} 
                             value={newTask}
                             onChange={handleChange}
+                            p={7}
                         />
                         <InputRightElement width='4rem'>
                             <Button
@@ -40,6 +42,7 @@ const TaskForm = ({ addTask }) => {
                                 borderColor={"#E6E6E6"}
                                 color={"#E6E6E6"}
                                 _hover={{ bg: "#E6E6E6" }}
+                                mt={'20PX'}
 
                             >
                                 +
