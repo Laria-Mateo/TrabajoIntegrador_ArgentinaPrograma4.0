@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Box, Flex, Input, Button, InputRightElement, InputGroup } from '@chakra-ui/react';
+import { Box, Flex, Input, Button, InputRightElement, InputGroup, useToast } from '@chakra-ui/react';
 
 const TaskForm = ({ addTask }) => {
     const [newTask, setNewTask] = useState('');
@@ -16,6 +16,8 @@ const TaskForm = ({ addTask }) => {
         }
     };
 
+    const toast = useToast()
+
     return (
         <form onSubmit={handleSubmit}>
             <Flex mt="5vh" mb="3vh" align="center" justify="center" direction={['column', 'row']}>
@@ -26,23 +28,32 @@ const TaskForm = ({ addTask }) => {
                             placeholder='Enter your Task'
                             borderRadius={"15px"}
                             borderColor={"#E6E6E6"}
-                            width={{ base: 'sm', lg: 'lg' }}  
-                            maxW={{ base: 'full', lg: 'container.lg' }} 
+                            width={{ base: 'sm', lg: 'lg' }}
+                            maxW={{ base: 'full', lg: 'container.lg' }}
                             value={newTask}
                             onChange={handleChange}
                             p={7}
                         />
                         <InputRightElement width='4rem'>
                             <Button
+                                p={"5px"}
                                 type='submit'
-                                h='1.75rem'
-                                size='sm'
+                                h='1.50rem'
+                                size='s'
                                 bg={"-moz-initial"}
-                                border={"1px"}
+                                border={"2px"}
                                 borderColor={"#E6E6E6"}
                                 color={"#E6E6E6"}
                                 _hover={{ bg: "#E6E6E6" }}
-                                mt={'20PX'}
+                                mt={'20px'}
+                                onClick={() =>
+                                    toast({
+                                        title: 'Tarea Creada',
+                                        description: "Has creado una tarea",
+                                        status: 'success',
+                                        duration: 1500,
+                                        isClosable: true,
+                                    })}
 
                             >
                                 +
@@ -51,7 +62,7 @@ const TaskForm = ({ addTask }) => {
                     </InputGroup>
                 </Box>
             </Flex>
-           
+
         </form>
     );
 };
